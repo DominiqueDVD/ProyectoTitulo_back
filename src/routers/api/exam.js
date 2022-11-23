@@ -8,15 +8,22 @@ const {
   verifyCreateFields,
 } = require("../../controllers/api/exam/create/verifyFields");
 const multerExam = require("../../utils/multer/exams");
+const { isTeacher } = require("../../middlewares/isTeacher");
+const { isTeacherOrStudent } = require("../../middlewares/isTeacherOrStudent");
 
-router.get("/:course_id/course", getExamByCourseIdController);
-router.get("/", getAllExamController);
+router.get(
+  "/:course_id/course",
+  isTeacherOrStudent,
+  getExamByCourseIdController
+);
+router.get("/", isTeacher, getAllExamController);
 router.post(
   "/",
+  isTeacher,
   verifyCreateFields,
   multerExam.single("exam"),
   createExamController
 );
-router.delete("/:exam_id", deleteExamController);
+router.delete("/:exam_id", isTeacher, deleteExamController);
 
 module.exports = router;

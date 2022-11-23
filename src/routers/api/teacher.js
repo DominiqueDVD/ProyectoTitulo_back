@@ -6,10 +6,18 @@ const updateTeacherController = require("../../controllers/api/teacher/update");
 const deleteTeacherController = require("../../controllers/api/teacher/delete");
 const { existsEmailAdmin } = require("../../middlewares/existsAdminEmail");
 const { encryptPassword } = require("../../middlewares/encryptPassword");
+const { isAdmin } = require("../../middlewares/isAdmin");
+const { isTeacherOrAdmin } = require("../../middlewares/isTeacherOrAdmin");
 
-router.get("/", getAllTeacherController);
-router.post("/", existsEmailAdmin, encryptPassword, createTeacherController);
-router.put("/:teacher_id", updateTeacherController);
-router.delete("/:teacher_id", deleteTeacherController);
+router.get("/", isTeacherOrAdmin, getAllTeacherController);
+router.post(
+  "/",
+  isAdmin,
+  existsEmailAdmin,
+  encryptPassword,
+  createTeacherController
+);
+router.put("/:teacher_id", isAdmin, updateTeacherController);
+router.delete("/:teacher_id", isAdmin, deleteTeacherController);
 
 module.exports = router;

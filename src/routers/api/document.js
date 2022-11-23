@@ -8,15 +8,22 @@ const getDocumentByCourseIdController = require("../../controllers/api/document/
 const {
   verifyCreateFields,
 } = require("../../controllers/api/document/create/verifyFields");
+const { isTeacher } = require("../../middlewares/isTeacher");
+const { isTeacherOrStudent } = require("../../middlewares/isTeacherOrStudent");
 
-router.get("/:course_id/course", getDocumentByCourseIdController);
-router.get("/", getAllDocumentController);
+router.get(
+  "/:course_id/course",
+  isTeacherOrStudent,
+  getDocumentByCourseIdController
+);
+router.get("/", isTeacher, getAllDocumentController);
 router.post(
   "/",
+  isTeacher,
   verifyCreateFields,
   multerDocument.single("document"),
   createDocumentController
 );
-router.delete("/:document_id", deleteDocumentController);
+router.delete("/:document_id", isTeacher, deleteDocumentController);
 
 module.exports = router;

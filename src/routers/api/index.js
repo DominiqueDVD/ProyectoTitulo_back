@@ -6,15 +6,18 @@ const studentRouter = require("./student");
 const courseRouter = require("./course");
 const documentRouter = require("./document");
 const examRouter = require("./exam");
+const enrollmentRouter = require("./enrollment");
+const answerController = require("./answer");
 const { isRoot } = require("../../middlewares/isRoot");
-const { isAdmin } = require("../../middlewares/isAdmin");
 const { isTeacher } = require("../../middlewares/isTeacher");
 
 router.use("/admin", isRoot, adminRouter);
-router.use("/teacher", isAdmin, teacherRouter);
-router.use("/student", isAdmin, studentRouter);
+router.use("/teacher", teacherRouter);
+router.use("/student", studentRouter);
 router.use("/course", isTeacher, courseRouter);
-router.use("/document", isTeacher, documentRouter);
-router.use("/exam", isTeacher, examRouter);
+router.use("/document", documentRouter);
+router.use("/exam", examRouter);
+router.use("/enrollment", isTeacher, enrollmentRouter);
+router.use("/answer", answerController);
 
 module.exports = router;

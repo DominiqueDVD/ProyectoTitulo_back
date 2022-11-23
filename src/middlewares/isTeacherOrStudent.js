@@ -1,6 +1,6 @@
 const { verifyJWT, jwtToString } = require("../utils/jwt");
 
-const isTeacher = (req, res, next) => {
+const isTeacherOrStudent = (req, res, next) => {
   try {
     const jwt_token = req.headers["authorization"];
     if (jwt_token === undefined)
@@ -16,10 +16,10 @@ const isTeacher = (req, res, next) => {
         message: "Token error",
       });
     const payload = jwtToString(token);
-    if (payload?.rol !== 1)
+    if (payload?.rol !== 1 && payload?.rol !== 2)
       return res.status(403).json({
         err: true,
-        message: "You are not a teacher, sorry",
+        message: "You are not a teacher or an student, sorry",
       });
     req.userPayload = payload;
     next();
@@ -32,4 +32,4 @@ const isTeacher = (req, res, next) => {
   }
 };
 
-module.exports = { isTeacher };
+module.exports = { isTeacherOrStudent };
