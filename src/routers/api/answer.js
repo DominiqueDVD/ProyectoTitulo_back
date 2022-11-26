@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const getAllAnswersController = require("../../controllers/api/answer/getAllAnswers");
 const getAllExamsPendientController = require("../../controllers/api/answer/getAllExamsPendient");
 const getAllEnrollmentExamController = require("../../controllers/api/answer/getAllEnrollmentExam");
+const updateAnswerController = require("../../controllers/api/answer/updateAnswer");
+const rateExamController = require("../../controllers/api/answer/rateExam");
 const getAnswersByStudentExamController = require("../../controllers/api/answer/getAnswersByStudentExam");
 const deleteEnrollToExamController = require("../../controllers/api/answer/deleteEnrollToExam");
 const { isStudent } = require("../../middlewares/isStudent");
@@ -14,7 +15,6 @@ const createAnswers = require("../../controllers/api/answer/create/createAnswers
 
 router.get("/:studentExam_id", getAnswersByStudentExamController);
 router.get("/:course_id/exam", getAllExamsPendientController);
-router.get("/all", getAllAnswersController);
 router.get("/", getAllEnrollmentExamController);
 
 const sendAnswerController = [
@@ -25,6 +25,8 @@ const sendAnswerController = [
   createAnswers,
 ];
 router.post("/", isStudent, sendAnswerController);
+router.post("/rate-exam", rateExamController);
+router.put("/", updateAnswerController);
 router.delete("/:studentExam_id", deleteEnrollToExamController);
 
 module.exports = router;

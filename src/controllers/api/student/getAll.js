@@ -4,7 +4,7 @@ const getAllStudentController = async (req, res) => {
   try {
     const [studentData] = await getAllStudentService();
     return res.status(200).json({
-      err: true,
+      err: false,
       message: "Students found succesfully!",
       data: studentData,
     });

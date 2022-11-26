@@ -4,7 +4,7 @@ const getAllTeacher = async (req, res) => {
   try {
     const [teacherData] = await getAllTeacherService();
     return res.status(200).json({
-      err: true,
+      err: false,
       message: "Teachers found succesfully!",
       data: teacherData,
     });

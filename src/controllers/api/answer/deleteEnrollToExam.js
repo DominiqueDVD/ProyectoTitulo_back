@@ -10,7 +10,7 @@ const deleteEnrollToExamController = async (req, res) => {
       });
     await deleteEnrollToExamService(studentExam_id);
     return res.status(200).json({
-      err: true,
+      err: false,
       message: `Enrollment to exam with id = ${studentExam_id} was removed succesfully!`,
     });
   } catch (err) {

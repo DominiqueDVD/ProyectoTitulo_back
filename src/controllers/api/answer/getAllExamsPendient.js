@@ -5,7 +5,7 @@ const getAllExamsPendientController = async (req, res) => {
     const { course_id } = req.params;
     const [examsFound] = await getAllExamsPendientService(course_id);
     return res.status(200).json({
-      err: true,
+      err: false,
       data: examsFound,
       message: "Exams pendient found successfully!",
     });

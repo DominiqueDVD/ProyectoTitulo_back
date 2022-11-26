@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-
 const createStudentController = require("../../controllers/api/student/create");
 const { existsEmailAdmin } = require("../../middlewares/existsAdminEmail");
+const resetPasswordController = require("../../controllers/api/student/resetPassword");
 const { existsTeacherEmail } = require("../../middlewares/existsTeacherEmail");
 const { encryptPassword } = require("../../middlewares/encryptPassword");
 const getStudentByCourseController = require("../../controllers/api/student/getByCourse");
@@ -23,6 +23,7 @@ router.post(
   encryptPassword,
   createStudentController
 );
+router.post("/reset-password", isStudent, resetPasswordController);
 router.put("/:student_id", isAdmin, updateStudentController);
 router.delete("/:student_id", isAdmin, deleteStudentController);
 

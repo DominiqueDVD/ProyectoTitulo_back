@@ -85,11 +85,7 @@ CREATE TABLE IF NOT EXISTS exam (
 	name VARCHAR(64) NOT NULL,
 	link TEXT NOT NULL,
 	type INTEGER NOT NULL DEFAULT 1,
-	is_pendient BOOLEAN NOT NULL DEFAULT 0,
-	score FLOAT(2, 2),
 	num_of_questions INT NOT NULL,
-	init_date DATETIME,
-	finish_date DATETIME,
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
 	course_id INT NOT NULL,
@@ -98,6 +94,10 @@ CREATE TABLE IF NOT EXISTS exam (
 
 CREATE TABLE IF NOT EXISTS studentExam (
 	studentExam_id INT AUTO_INCREMENT PRIMARY KEY,
+	is_pendient BOOLEAN NOT NULL DEFAULT 1,
+	score DECIMAL(2, 1),
+	init_date DATETIME,
+	finish_date DATETIME,
 	student_id INT,
 	exam_id INT,
 	FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
