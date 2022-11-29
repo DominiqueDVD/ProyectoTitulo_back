@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS course (
 
 CREATE TABLE IF NOT EXISTS enrollment (
 	enrollment_id INT AUTO_INCREMENT PRIMARY KEY,
+	final_score DECIMAL(2, 1),
 	course_id INT,
 	student_id INT,
 	FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE,

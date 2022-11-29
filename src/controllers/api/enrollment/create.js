@@ -1,5 +1,7 @@
 const addStudentService = require("../../../services/database/enrollment/create");
 const verifyEnrollmentService = require("../../../services/database/enrollment/getByCourseAndStudent");
+const getExamsByCourseIdService = require("../../../services/database/exam/getByCourse");
+const studentEnrollToExamService = require("../../../services/database/answers/studentEnrollToExamService");
 
 const createEnrollmentValidator = (req, res, next) => {
   const { course_id, student_id } = req.body;
@@ -30,6 +32,14 @@ const createEnrollmentController = async (req, res) => {
         message: `Student with id=${student_id} is already enrolled to Course with id=${course_id}`,
       });
     await addStudentService(course_id, student_id);
+    const [examsFounds] = await getExamsByCourseIdService(course_id);
+    const enrollToAllExamOfCoursePromises = examsFounds.map(({ exam_id }) =>
+      studentEnrollToExamService(student_id, exam_id)
+    );
+    await Promise.all(enrollToAllExamOfCoursePromises);
+    console.log(
+      `Student with id = ${student_id} was enrolled to ${examsFounds?.length} exams`
+    );
     const message = `Student with id = ${student_id} was enrrolled succesfully to Course with id = ${course_id}`;
     console.log(message);
     return res.status(201).json({

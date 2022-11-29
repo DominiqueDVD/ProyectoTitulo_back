@@ -5,6 +5,7 @@ const { existsEmailAdmin } = require("../../middlewares/existsAdminEmail");
 const resetPasswordController = require("../../controllers/api/student/resetPassword");
 const { existsTeacherEmail } = require("../../middlewares/existsTeacherEmail");
 const { encryptPassword } = require("../../middlewares/encryptPassword");
+const examsPendientController = require("../../controllers/api/student/examsPendient");
 const getStudentByCourseController = require("../../controllers/api/student/getByCourse");
 const getAllStudentController = require("../../controllers/api/student/getAll");
 const updateStudentController = require("../../controllers/api/student/update");
@@ -13,6 +14,7 @@ const { isAdmin } = require("../../middlewares/isAdmin");
 const { isStudent } = require("../../middlewares/isStudent");
 const { isTeacherOrAdmin } = require("../../middlewares/isTeacherOrAdmin");
 
+router.get("/:course_id/exams-pendient", isStudent, examsPendientController);
 router.get("/courseByStudent", isStudent, getStudentByCourseController);
 router.get("/", isTeacherOrAdmin, getAllStudentController);
 router.post(

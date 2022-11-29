@@ -1,5 +1,23 @@
 const getAllExamsPendientService = require("../../../services/database/answers/getAllExamsPendient");
 
+const getAllExamsPendientValidator = (req, res, next) => {
+  try {
+    const { course_id } = req.params;
+    if (isNaN(course_id))
+      return res.status(400).json({
+        err: true,
+        message: "`course_id` is required and must be a number",
+      });
+    req.course_id = course_id;
+    next();
+  } catch (err) {
+    return res.status(400).json({
+      err: true,
+      message: err.message,
+    });
+  }
+};
+
 const getAllExamsPendientController = async (req, res) => {
   try {
     const { course_id } = req.params;
@@ -7,7 +25,7 @@ const getAllExamsPendientController = async (req, res) => {
     return res.status(200).json({
       err: false,
       data: examsFound,
-      message: "Exams pendient found successfully!",
+      message: "Exams to rate found successfully!",
     });
   } catch (err) {
     console.log(err);
@@ -18,4 +36,7 @@ const getAllExamsPendientController = async (req, res) => {
   }
 };
 
-module.exports = getAllExamsPendientController;
+module.exports = {
+  getAllExamsPendientValidator,
+  getAllExamsPendientController,
+};

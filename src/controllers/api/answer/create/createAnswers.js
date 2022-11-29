@@ -1,13 +1,17 @@
 const createAnswerService = require("../../../../services/database/answers/create");
+const setIsExamPendientService = require("../../../../services/database/answers/setIsExamPendient");
 
 const sendAnswerController = async (req, res) => {
   try {
     const dataAnswers = req.dataAnswers;
     const studentExam_id = req.studentExam_id;
+    const { student_id } = req.userPayload;
+    const { exam_id } = req.body;
     const answersPromises = dataAnswers?.map((el) =>
       createAnswerService(el?.question_id, el?.answer_text, studentExam_id)
     );
     await Promise.all(answersPromises);
+    await setIsExamPendientService(student_id, exam_id);
     return res.status(200).json({
       err: false,
       message: "The answers was sent succesfully, thanks!",

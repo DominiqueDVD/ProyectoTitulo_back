@@ -1,6 +1,6 @@
 const mysql = require("../../../config/mysql");
 
-const updateStudent = (student_id, name, rut, password) =>
+const updateStudentWithPasswordService = (student_id, name, rut, password) =>
   mysql.promise().execute(
     `UPDATE student
      SET name = ?, rut = ?, passwd = ?
@@ -8,4 +8,15 @@ const updateStudent = (student_id, name, rut, password) =>
     [name, rut, password, student_id]
   );
 
-module.exports = updateStudent;
+const updateStudentWithoutPasswordService = (student_id, name, rut) =>
+  mysql.promise().execute(
+    `UPDATE student
+     SET name = ?, rut = ?
+     WHERE student_id = ?`,
+    [name, rut, student_id]
+  );
+
+module.exports = {
+  updateStudentWithPasswordService,
+  updateStudentWithoutPasswordService,
+};

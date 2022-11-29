@@ -8,11 +8,13 @@ const isAlreadyRate = async (req, res, next) => {
       student_id,
       exam_id
     );
-    if (enrollExamData?.length !== 0)
+    const { studentExam_id, is_pendient } = enrollExamData?.[0];
+    if (+is_pendient === 0)
       return res.status(400).json({
         err: true,
         message: "You already send answers to this exam",
       });
+    req.studentExam_id = studentExam_id;
     next();
   } catch (err) {
     console.log(err);

@@ -1,4 +1,6 @@
 const deleteEnrollmentService = require("../../../services/database/enrollment/delete");
+const getAllExamsByCourseIdService = require("../../../services/database/exam/getByCourse");
+const deleteEnrollToExamByCourseAndExamService = require("../../../services/database/answers/deleteEnrollToExamByCourseAndExam");
 
 const deleteEnrollmentValidator = (req, res, next) => {
   const { course_id, student_id } = req.query;
@@ -21,6 +23,14 @@ const deleteEnrollmentController = async (req, res) => {
     const { course_id, student_id } = req.query;
     await deleteEnrollmentService(course_id, student_id);
     const message = `Student with id = ${student_id} was removed of Course with id = ${course_id}`;
+    const [examsFound] = await getAllExamsByCourseIdService(course_id);
+    const removeExamsEnrollPromises = examsFound.map(({ exam_id }) =>
+      deleteEnrollToExamByCourseAndExamService(student_id, exam_id)
+    );
+    await Promise.all(removeExamsEnrollPromises);
+    console.log(
+      `Student with id = ${student_id} was removed of ${examsFound?.length} exams`
+    );
     console.log(message);
     return res.status(200).json({
       message,
