@@ -1,4 +1,4 @@
-USE incloodle;
+USE proyecto;
 
 CREATE TABLE IF NOT EXISTS admin (
 	admin_id INT AUTO_INCREMENT PRIMARY KEY,

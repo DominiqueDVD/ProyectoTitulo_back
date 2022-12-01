@@ -1,4 +1,4 @@
-USE incloodle;
+USE proyecto;
 
 DROP TABLE admin;
 
