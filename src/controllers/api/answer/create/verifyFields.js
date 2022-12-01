@@ -1,11 +1,12 @@
 const verifyFields = (req, res, next) => {
   try {
-    const { exam_id, answers } = req.body;
+    const { exam_id, answers, init_date } = req.body;
     const dataAnswers = JSON.parse(answers);
-    if (!exam_id || !answers)
+    if (!exam_id || !answers || !init_date)
       return res.status(400).json({
         err: true,
-        message: "You must provide a `exam_id` and `answers` fields",
+        message:
+          "You must provide a `exam_id`, `answers` and `init_date` fields",
       });
     if (isNaN(parseInt(exam_id)))
       return res.status(400).json({

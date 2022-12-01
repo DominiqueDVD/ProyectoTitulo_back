@@ -12,12 +12,17 @@ const deleteEnrollToExamController = require("../../controllers/api/answer/delet
 const { isStudent } = require("../../middlewares/isStudent");
 const { isTeacher } = require("../../middlewares/isTeacher");
 const { isMyCourse } = require("../../middlewares/isMyCourse");
+const { isTeacherOrStudent } = require("../../middlewares/isTeacherOrStudent");
 const verifyFields = require("../../controllers/api/answer/create/verifyFields");
 const isAlreadyRate = require("../../controllers/api/answer/create/isAlreadyRate");
 const numberOfAnswers = require("../../controllers/api/answer/create/numberOfAnswers");
 const createAnswers = require("../../controllers/api/answer/create/createAnswers");
 
-router.get("/:studentExam_id", isTeacher, getAnswersByStudentExamController);
+router.get(
+  "/:studentExam_id",
+  isTeacherOrStudent,
+  getAnswersByStudentExamController
+);
 router.get(
   "/:course_id/exam",
   isTeacher,

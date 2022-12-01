@@ -7,6 +7,7 @@ const getAllExamsPendient = (course_id) =>
       studentExam.student_id,
       studentExam.exam_id,
       exam.name AS exam_name,
+      exam.link,
       student.name AS student_name
      FROM studentExam
      JOIN exam 

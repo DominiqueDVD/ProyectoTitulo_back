@@ -10,7 +10,7 @@ require("./config/mysql");
 
 app.set("PORT", process.env.PORT || 64578);
 
-app.use(helmet());
+// app.use(helmet());
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
