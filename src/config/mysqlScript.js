@@ -21,6 +21,7 @@ const mysqlScript = `
 		teacher_id INT AUTO_INCREMENT PRIMARY KEY,
 		email VARCHAR(64) NOT NULL UNIQUE,
 		name VARCHAR(64) NOT NULL,
+		apellido VARCHAR(64) NOT NULL,
 		rut VARCHAR(64) NOT NULL UNIQUE,
 		passwd VARCHAR(64) NOT NULL,
 		rol INT NOT NULL,
@@ -32,6 +33,7 @@ const mysqlScript = `
 		student_id INT AUTO_INCREMENT PRIMARY KEY,
 		email VARCHAR(64) NOT NULL UNIQUE,
 		name VARCHAR(64) NOT NULL,
+		
 		rut VARCHAR(64) NOT NULL UNIQUE,
 		passwd VARCHAR(64) NOT NULL,
 		rol INT NOT NULL,
@@ -51,6 +53,7 @@ const mysqlScript = `
 		course_id INT AUTO_INCREMENT PRIMARY KEY,
 		name VARCHAR(64) NOT NULL,
 		period VARCHAR(64) NOT NULL,
+		carrera VARCHAR(64) NOT NULL,
 		final_score FLOAT(2,2),
 		teacher_id INT NOT NULL,
 		createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -83,6 +86,7 @@ const mysqlScript = `
 		createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
 		course_id INT NOT NULL,
+		max_points INT NOT NULL,
 		FOREIGN KEY (course_id) REFERENCES course(course_id)
 	);
 	CREATE TABLE IF NOT EXISTS studentExam (
@@ -97,6 +101,8 @@ const mysqlScript = `
 		answer VARCHAR(64),
 		is_correct BOOLEAN NOT NULL DEFAULT 0,
 		exam_id INT NOT NULL,
+		retro VARCHAR(2000) NOT NULL,
+		points INT NOT NULL,
 		FOREIGN KEY (exam_id) REFERENCES exam(exam_id)
 	);
 `;

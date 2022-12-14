@@ -7,19 +7,20 @@ const { createHash } = require("../../../utils/bcrypt");
 const updateStudentController = async (req, res) => {
   try {
     const { student_id } = req.params;
-    const { name, rut, password } = req.body;
+    const { name, lastname, rut, password } = req.body;
     console.log(password);
-    if (!student_id || !name || !rut)
+    if (!student_id || !name || !rut || !lastname)
       return res.status(400).json({
         err: true,
-        message: "`name`, `rut` and `student_id` are required",
+        message: "`name`, `lastname`, `rut` and `student_id` are required",
       });
     if (password === undefined || password === "")
-      await updateStudentWithoutPasswordService(student_id, name, rut);
+      await updateStudentWithoutPasswordService(student_id, name, lastname, rut);
     else
       updateStudentWithPasswordService(
         student_id,
         name,
+        lastname,
         rut,
         createHash(password)
       );
