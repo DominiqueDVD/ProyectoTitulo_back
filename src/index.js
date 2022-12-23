@@ -24,6 +24,10 @@ app.use((err, req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  console.log('Peticion recibida')
+  res.status(200).send(' <h1> hollaaa </h1>')
+})
 app.listen(app.get("PORT"), () => {
   console.log("Listening on port", app.get("PORT"));
 });
