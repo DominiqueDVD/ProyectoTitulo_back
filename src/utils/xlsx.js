@@ -7,7 +7,6 @@ const jsonToXLSX = (content) => {
         sheet: "Reporte general",
         columns: [
           { label: "Nombre Alumno", value: "studentName" },
-          { label: "Rut Alumno", value: "studentRut" },
           { label: "Nombre Curso", value: "courseName" },
           { label: "Nombre Evaluación", value: "examName" },
           { label: "Fecha realización", value: "initDate" },

@@ -21,7 +21,7 @@ const mysqlScript = `
 		teacher_id INT AUTO_INCREMENT PRIMARY KEY,
 		email VARCHAR(64) NOT NULL UNIQUE,
 		name VARCHAR(64) NOT NULL,
-		apellido VARCHAR(64) NOT NULL,
+		lastname VARCHAR(64) NOT NULL,
 		rut VARCHAR(64) NOT NULL UNIQUE,
 		passwd VARCHAR(64) NOT NULL,
 		rol INT NOT NULL,
@@ -33,7 +33,7 @@ const mysqlScript = `
 		student_id INT AUTO_INCREMENT PRIMARY KEY,
 		email VARCHAR(64) NOT NULL UNIQUE,
 		name VARCHAR(64) NOT NULL,
-		
+		lastname VARCHAR(64) NOT NULL,
 		rut VARCHAR(64) NOT NULL UNIQUE,
 		passwd VARCHAR(64) NOT NULL,
 		rol INT NOT NULL,
