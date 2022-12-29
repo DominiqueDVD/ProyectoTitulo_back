@@ -11,6 +11,13 @@ CREATE TABLE IF NOT EXISTS admin (
 	updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS instructive (
+	instructive_id INT AUTO_INCREMENT PRIMARY KEY,
+	question VARCHAR(128),
+	answer MEDIUMTEXT NOT NULL,
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+);
 
 CREATE TABLE IF NOT EXISTS teacher (
 	teacher_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -128,3 +135,46 @@ CREATE TABLE IF NOT EXISTS period (
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- INSERT INTO
+-- 	`admin` (`email`, `name`, `passwd`, `rol`, `is_active`)
+-- VALUES
+-- 	(
+-- 		'admin@gmail.com',
+-- 		'administrator',
+-- 		'password',
+-- 		0,
+-- 		1
+-- 	);
+-- INSERT INTO
+-- 	`teacher` (
+-- 		`name`,
+-- 		`email`,
+-- 		`passwd`,
+-- 		`rut`,
+-- 		`rol`,
+-- 		`is_active`
+-- 	)
+-- VALUES
+-- 	(
+-- 		'Tebaida Point',
+-- 		'teacher@gmail.com',
+-- 		'password',
+-- 		'3S76F98HBT86',
+-- 		1,
+-- 		1
+-- 	);
+-- INSERT INTO
+-- 	`student` (`name`, `email`, `passwd`, `rut`, `rol`)
+-- VALUES
+-- 	(
+-- 		'Linux Torvalds',
+-- 		'student@gmail.com',
+-- 		'password',
+-- 		'9K92Y36IUV56',
+-- 		2
+-- 	);
+-- INSERT INTO
+-- 	`course` (`name`, `period`, `teacher_id`)
+-- VALUES
+-- 	('Penetration Testing', '2023-1', 1);

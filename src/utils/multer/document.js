@@ -10,10 +10,10 @@ const storage = multer.diskStorage({
     cb(null, documentPath);
   },
   filename: (req, file, cb) => {
-
+    console.log("hostD",host)
     const extension = file.mimetype.split("/")[1];
     const newFileName = `${uuid.v4()}.${extension}`;
-    req.wholeFileName = `${evaluacionaccesible.netlify.app}/material/${newFileName}`;
+    req.wholeFileName = `${host}/material/${newFileName}`;
     cb(null, newFileName);
   },
 });
