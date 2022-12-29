@@ -16,7 +16,6 @@ DROP TABLE exam;
 
 DROP TABLE course;
 
-DROP TABLE instructive;
 
 DROP TABLE student;
 
