@@ -10,10 +10,10 @@ const storage = multer.diskStorage({
     cb(null, examPath);
   },
   filename: (req, file, cb) => {
-    console.log("hostE",host)
+    
     const extension = file.mimetype.split("/")[1];
     const newFileName = `${uuid.v4()}.${extension}`;
-    req.wholeFileName = `${host}/exams/${newFileName}`;
+    req.wholeFileName = `${evaluacionaccesible.netlify.app}/exams/${newFileName}`;
     cb(null, newFileName);
   },
 });
