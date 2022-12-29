@@ -8,7 +8,7 @@ const app = express();
 const mainRouter = require("./routers/main");
 require("./config/mysql");
 
-app.set("PORT", process.env.PORT || 64578);
+app.set("PORT", process.env.PORT);
 
 // app.use(helmet());
 app.use(cors());
