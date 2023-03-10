@@ -68,7 +68,7 @@ career VARCHAR(64) NOT NULL,
 
 CREATE TABLE IF NOT EXISTS enrollment (
 	enrollment_id INT AUTO_INCREMENT PRIMARY KEY,
-final_score DECIMAL(3, 1),
+final_score DECIMAL(2, 1),
 	course_id INT,
 	student_id INT,
 	FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS exam (
 	name VARCHAR(64) NOT NULL,
 	description VARCHAR(64) NOT NULL,
 	link TEXT NOT NULL,
-	max_score DECIMAL(3, 1) NOT NULL,
+	max_score DECIMAL(2,1),
 	type INTEGER NOT NULL DEFAULT 1,
 	num_of_questions INT NOT NULL,
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS exam (
 CREATE TABLE IF NOT EXISTS studentExam (
 	studentExam_id INT AUTO_INCREMENT PRIMARY KEY,
 	is_pendient BOOLEAN NOT NULL DEFAULT 1,
-score DECIMAL(3, 1),
+score INT,
 	init_date DATETIME,
 	finish_date DATETIME,
 	student_id INT,

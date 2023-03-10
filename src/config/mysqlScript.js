@@ -48,7 +48,7 @@ const mysqlScript = `
 		name VARCHAR(64) NOT NULL,
 		period VARCHAR(64) NOT NULL,
 		carrera VARCHAR(64) NOT NULL,
-		final_score FLOAT(2,2),
+		final_score DECIMAL(2,1),
 		teacher_id INT NOT NULL,
 		createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -71,19 +71,17 @@ const mysqlScript = `
 	);
 	CREATE TABLE IF NOT EXISTS exam (
 		exam_id INT AUTO_INCREMENT PRIMARY KEY,
-		name VARCHAR(64) NOT NULL,
-		description VARCHAR(64) NOT NULL,
-		link TEXT NOT NULL,
-		is_pendient BOOLEAN NOT NULL DEFAULT 0,
-		score FLOAT(2,2),
-		num_of_questions INT NOT NULL,
-		init_date DATETIME,
-		finish_date DATETIME,
-		createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-		updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-		course_id INT NOT NULL,
-		max_points INT NOT NULL,
-		FOREIGN KEY (course_id) REFERENCES course(course_id)
+	name VARCHAR(64) NOT NULL,
+	description VARCHAR(64) NOT NULL,
+	link TEXT NOT NULL,
+	max_score DECIMAL(2,1),
+	type INTEGER NOT NULL DEFAULT 1,
+	num_of_questions INT NOT NULL,
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updatedAt TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+	course_id INT NOT NULL,
+	max_points INT NOT NULL,
+	FOREIGN KEY (course_id) REFERENCES course(course_id) ON DELETE CASCADE
 	);
 	CREATE TABLE IF NOT EXISTS studentExam (
 		studentExam_id INT AUTO_INCREMENT PRIMARY KEY,
