@@ -8,8 +8,8 @@ const createDocumentController = async (req, res) => {
         err: true,
         message: "You must upload a file",
       });
-    const { name, course_id } = req.query;
-    await createDocumentService(name, link, course_id);
+    const { name, description, course_id,  } = req.query;
+    await createDocumentService(name, description, link, course_id );
     const message = `Document created succesfully!`;
     console.log(message);
     return res.status(201).json({

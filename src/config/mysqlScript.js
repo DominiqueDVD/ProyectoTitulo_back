@@ -64,6 +64,7 @@ const mysqlScript = `
 	CREATE TABLE IF NOT EXISTS document (
 		document_id INT AUTO_INCREMENT PRIMARY KEY,
 		name VARCHAR(64) NOT NULL,
+		description VARCHAR(64) NOT NULL,
 		link TEXT NOT NULL,
 		course_id INT NOT NULL,
 		FOREIGN KEY (course_id) REFERENCES course(course_id)
@@ -71,6 +72,7 @@ const mysqlScript = `
 	CREATE TABLE IF NOT EXISTS exam (
 		exam_id INT AUTO_INCREMENT PRIMARY KEY,
 		name VARCHAR(64) NOT NULL,
+		description VARCHAR(64) NOT NULL,
 		link TEXT NOT NULL,
 		is_pendient BOOLEAN NOT NULL DEFAULT 0,
 		score FLOAT(2,2),

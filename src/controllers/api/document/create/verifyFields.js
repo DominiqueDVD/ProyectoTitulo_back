@@ -1,5 +1,5 @@
 const verifyCreateFields = (req, res, next) => {
-  const { name, course_id } = req.query;
+  const { name, course_id, } = req.query;
   if (!name || !course_id)
     return res.status(400).json({
       err: true,
